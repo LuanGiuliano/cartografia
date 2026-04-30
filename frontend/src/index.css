@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Color Palette - Updated Palette */
+  --bg-color: #ddd4bf; 
+  --bg-color-secondary: #fdfbf7; 
+  
+  --text-primary: #47545a; 
+  --text-secondary: #7f746e; 
+  
+  --accent-color: #a05d40; 
+  --accent-hover: #8f5339;
+  
+  --navy-blue: #47545a; /* mapped */
+  --petroleum-blue: #a6987f; /* mapped */
+  
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  
+  --grid-color: rgba(71, 84, 90, 0.1); /* Chart grid lines */
+  --tooltip-bg: #ffffff;
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(253, 251, 247, 0.75);
+  --glass-border: rgba(160, 93, 64, 0.2); 
+  --glass-shadow: 0 4px 24px 0 rgba(71, 84, 90, 0.1);
+  
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "San Francisco", "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Utilities */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--petroleum-blue), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

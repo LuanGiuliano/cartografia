@@ -1,0 +1,125 @@
+.splash-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ddd4bf; /* Updated to match new palette */
+  background-image: url('/banner.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.8s ease-in-out 0.4s;
+  overflow: hidden;
+}
+
+.splash-container.animating {
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.splash-icon {
+  color: var(--petroleum-blue);
+  margin-bottom: 2rem;
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.splash-banner {
+  max-width: 90%;
+  max-height: 400px;
+  object-fit: contain;
+  margin-bottom: 3rem;
+  transform-origin: center center;
+  /* Combine the text zoom with the sweep animation */
+  transition: transform 1.5s cubic-bezier(0.76, 0, 0.24, 1), opacity 1.2s ease-in 0.3s;
+}
+
+.splash-button {
+  background-color: var(--petroleum-blue);
+  color: #ffffff;
+  border: 2px solid var(--petroleum-blue);
+  padding: 0.75rem 3rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: absolute;
+  bottom: 20%; /* Posição fixa perto da base da tela, longe da logo central */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para dar destaque */
+}
+
+.splash-button:hover {
+  background-color: var(--petroleum-blue);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(27, 54, 93, 0.3);
+}
+
+.splash-footer {
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.splash-seduc-logo {
+  height: 50px;
+  object-fit: contain;
+  opacity: 0.95;
+  transition: opacity 0.3s ease;
+  background-color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.splash-seduc-logo:hover {
+  opacity: 1;
+}
+
+.splash-copyright {
+  color: #47545a; /* Dark Blue / Slate from new palette */
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+  border-left: 2px solid rgba(71, 84, 90, 0.3);
+  padding-left: 1.5rem;
+  text-transform: uppercase;
+}
+
+/* Animations */
+.fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.zoom-through {
+  /* Extreme scale to zoom through the text */
+  transform: scale(200) translate(-5%, 0%);
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .splash-banner {
+    max-width: 95%;
+  }
+}
