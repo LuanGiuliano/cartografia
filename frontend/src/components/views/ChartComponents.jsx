@@ -19,7 +19,7 @@ export const ExpandableDiscursiveCard = ({ data, title, total, layout = "vertica
           onClick={() => setIsExpanded(!isExpanded)}
           style={{
             padding: '6px 12px',
-            backgroundColor: 'var(--primary-color)',
+            backgroundColor: 'var(--accent-color)',
             color: 'white',
             border: 'none',
             borderRadius: '4px',
