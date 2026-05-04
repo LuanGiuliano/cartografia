@@ -135,9 +135,10 @@ export const processData = (rawData) => {
   const outrasAreasChart = countWords('SE SIM, QUAIS ÁREAS?');
 
   // 4. Clima Organizacional
-  const climaComunicacaoChart = countBy('COMUNICAÇÃO INTERNA CLARA E OBJETIVA');
-  const climaClarezaChart = countBy('CLAREZA DAS ATRIBUIÇÕES');
-  const climaEmpatiaChart = countBy('EMPATIA E COOPERAÇÃO ENTRE PARES');
+  const sort5to1 = (arr) => [...arr].sort((a, b) => parseInt(b.name) - parseInt(a.name));
+  const climaComunicacaoChart = sort5to1(countBy('COMUNICAÇÃO INTERNA CLARA E OBJETIVA'));
+  const climaClarezaChart = sort5to1(countBy('CLAREZA DAS ATRIBUIÇÕES'));
+  const climaEmpatiaChart = sort5to1(countBy('EMPATIA E COOPERAÇÃO ENTRE PARES'));
   const desafiosClimaChart = countWords('DESTAQUE AS PRINCIPAIS DESAFIOS QUE VOCÊ IDENTIFICA');
 
   // 5. Percepção Institucional (13 individual charts instead of averages)
