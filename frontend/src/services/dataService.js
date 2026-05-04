@@ -135,7 +135,14 @@ export const processData = (rawData) => {
   const outrasAreasChart = countWords('SE SIM, QUAIS ÁREAS?');
 
   // 4. Clima Organizacional
-  const sort5to1 = (arr) => [...arr].sort((a, b) => parseInt(b.name) - parseInt(a.name));
+  const sort5to1 = (arr) => [...arr].sort((a, b) => {
+    const numA = parseInt(a.name);
+    const numB = parseInt(b.name);
+    if (!isNaN(numA) && !isNaN(numB)) return numB - numA;
+    if (!isNaN(numA)) return -1;
+    if (!isNaN(numB)) return 1;
+    return 0;
+  });
   const climaComunicacaoChart = sort5to1(countBy('COMUNICAÇÃO INTERNA CLARA E OBJETIVA'));
   const climaClarezaChart = sort5to1(countBy('CLAREZA DAS ATRIBUIÇÕES'));
   const climaEmpatiaChart = sort5to1(countBy('EMPATIA E COOPERAÇÃO ENTRE PARES'));
@@ -161,7 +168,14 @@ export const processData = (rawData) => {
   const percepcaoCharts = percepcaoKeys.map(pk => {
     const rawData = countBy(pk.key).filter(d => d.name !== 'Não Informado');
     // Força a ordem da legenda para ser 5, 4, 3, 2, 1
-    rawData.sort((a, b) => parseInt(b.name) - parseInt(a.name));
+    rawData.sort((a, b) => {
+      const numA = parseInt(a.name);
+      const numB = parseInt(b.name);
+      if (!isNaN(numA) && !isNaN(numB)) return numB - numA;
+      if (!isNaN(numA)) return -1;
+      if (!isNaN(numB)) return 1;
+      return 0;
+    });
     return {
       label: pk.label,
       data: rawData
