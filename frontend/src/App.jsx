@@ -8,14 +8,15 @@ import {
   Lightbulb,
   Award,
   BookOpen,
-  LayoutDashboard
+  LayoutDashboard,
+  Info
 } from 'lucide-react';
 import './App.css';
 
 // Components
 import SplashScreen from './components/SplashScreen';
-import MarajoaraHeader from './components/MarajoaraHeader';
 import GlobalFilters from './components/GlobalFilters';
+import InfoModal from './components/InfoModal';
 
 // Views
 import IdOrganizacional from './components/views/IdOrganizacional';
@@ -42,6 +43,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState(VIEWS[0].id);
   const [showSplash, setShowSplash] = useState(true);
+  const [showInfoModal, setShowInfoModal] = useState(false);
 
   // Filter states
   const [selectedDiretoria, setSelectedDiretoria] = useState('');
@@ -92,8 +94,7 @@ function App() {
 
   return (
     <>
-      <MarajoaraHeader />
-      <div className="app-layout" style={{ height: 'calc(100vh - 28px)', minHeight: 'calc(100vh - 28px)' }}>
+      <div className="app-layout" style={{ height: '100vh', minHeight: '100vh' }}>
         {/* Sidebar Navigation */}
       <aside className="sidebar">
         <div className="sidebar-brand">
@@ -101,9 +102,18 @@ function App() {
             <img src="/brasao.png" alt="Brasão do Estado do Pará" style={{ height: '32px', objectFit: 'contain' }} />
             <h2 className="text-gradient" style={{ fontSize: '1.2rem', margin: 0 }}>SAGEP-SEDUC</h2>
           </div>
-          <p style={{ fontWeight: '500', fontSize: '1rem', color: 'var(--petroleum-blue)', fontFamily: 'Georgia, serif', fontStyle: 'italic', borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.75rem', marginBottom: '1rem' }}>
-            Cartografia de Saberes
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.75rem', marginBottom: '1rem' }}>
+            <p style={{ fontWeight: '500', fontSize: '1rem', color: 'var(--petroleum-blue)', fontFamily: 'Georgia, serif', fontStyle: 'italic', margin: 0 }}>
+              Cartografia de Saberes
+            </p>
+            <div 
+              title="Mapeamento e Análise dos Perfis e Competências dos Servidores da SAGEP / SEDUC-PA" 
+              style={{ cursor: 'pointer', color: 'var(--petroleum-blue)', display: 'flex' }}
+              onClick={() => setShowInfoModal(true)}
+            >
+              <Info size={18} />
+            </div>
+          </div>
           <div style={{ marginTop: '1rem', padding: '0.75rem', backgroundColor: 'rgba(16, 185, 129, 0.1)', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
             <p style={{ color: 'var(--success-color)', fontSize: '0.85rem', fontWeight: '600', textAlign: 'center' }}>
               {data?.totalResponses || 0} Respostas Recebidas
@@ -123,6 +133,11 @@ function App() {
             </div>
           ))}
         </nav>
+        
+        <div style={{ marginTop: 'auto', paddingTop: '1.5rem', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+          <div style={{ marginBottom: '4px' }}>© 2026 SAGEP - Secretaria Adjunta de Gestão de Pessoas</div>
+          <div style={{ fontSize: '0.9em', opacity: 0.8 }}>Desenvolvido por Luan Giuliano</div>
+        </div>
       </aside>
 
         {/* Main Content Area */}
@@ -139,6 +154,7 @@ function App() {
           <ActiveComponent data={data} />
         </main>
       </div>
+      <InfoModal isOpen={showInfoModal} onClose={() => setShowInfoModal(false)} />
     </>
   );
 }

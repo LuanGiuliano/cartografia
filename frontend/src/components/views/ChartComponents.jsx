@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as BarTooltip, ResponsiveContainer, LabelList, PieChart, Pie, Cell, Tooltip as PieTooltip, Legend } from 'recharts';
 
-export const ExpandableDiscursiveCard = ({ data, title, total, layout = "vertical", height = 300, yAxisWidth = 190 }) => {
+export const ExpandableDiscursiveCard = ({ data, title, subtitle, total, layout = "vertical", height = 300, yAxisWidth = 190 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (!data) return null;
@@ -13,8 +13,11 @@ export const ExpandableDiscursiveCard = ({ data, title, total, layout = "vertica
 
   return (
     <div className="glass-panel chart-card col-span-12" style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h3 style={{ fontSize: '14px', margin: 0 }}>{title}</h3>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <div>
+          <h3 style={{ fontSize: '14px', margin: 0, marginBottom: subtitle ? '4px' : '0' }}>{title}</h3>
+          {subtitle && <p style={{ fontSize: '12px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.4' }}>{subtitle}</p>}
+        </div>
         <button 
           onClick={() => setIsExpanded(!isExpanded)}
           style={{
@@ -25,7 +28,8 @@ export const ExpandableDiscursiveCard = ({ data, title, total, layout = "vertica
             borderRadius: '4px',
             cursor: 'pointer',
             fontSize: '12px',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            marginTop: '2px'
           }}
         >
           {isExpanded ? 'Ocultar Respostas' : 'Ver Todas as Respostas'}
@@ -85,14 +89,20 @@ const getFillColor = (name, index) => {
   if (!name) return COLORS[index % COLORS.length];
   const n = String(name).trim().toUpperCase();
   
-  // Positivos (Verdes)
-  if (['SIM', '5', '4', 'POSITIVO', 'SEMPRE', 'TOTALMENTE'].includes(n)) return '#4CAF50'; 
+  // Nível 5 (Muito Positivo)
+  if (['SIM', '5', 'POSITIVO', 'SEMPRE', 'TOTALMENTE'].includes(n)) return '#4CAF50'; // Verde
   
-  // Medianos (Amarelos/Laranjas)
-  if (['TALVEZ', 'PARCIALMENTE', '3', 'MEDIANO', 'ÀS VEZES'].includes(n)) return '#FFC107';
+  // Nível 4 (Positivo)
+  if (['4'].includes(n)) return '#8BC34A'; // Verde Claro
   
-  // Negativos (Vermelhos)
-  if (['NÃO', '1', '2', 'NEGATIVO', 'NUNCA', 'NENHUMA'].includes(n)) return '#F44336';
+  // Nível 3 (Mediano)
+  if (['TALVEZ', 'PARCIALMENTE', '3', 'MEDIANO', 'ÀS VEZES'].includes(n)) return '#FFC107'; // Amarelo
+  
+  // Nível 2 (Negativo)
+  if (['2'].includes(n)) return '#FF9800'; // Laranja
+  
+  // Nível 1 (Muito Negativo)
+  if (['NÃO', '1', 'NEGATIVO', 'NUNCA', 'NENHUMA'].includes(n)) return '#D32F2F'; // Vermelho Escuro
   
   // Nulos (Cinza)
   if (['NÃO INFORMADO', 'NÃO TENHO'].includes(n)) return '#9E9E9E';
@@ -100,12 +110,17 @@ const getFillColor = (name, index) => {
   return COLORS[index % COLORS.length];
 };
 
-export const SimpleBarChart = ({ data, title, total, layout = "horizontal", height = 300, yAxisWidth = 190 }) => {
+export const SimpleBarChart = ({ data, title, subtitle, total, layout = "horizontal", height = 300, yAxisWidth = 190 }) => {
   const truncateLabel = (text) => typeof text === 'string' && text.length > 25 ? text.substring(0, 25) + '...' : text;
 
   return (
   <div className={`glass-panel chart-card ${layout === 'vertical' ? 'col-span-6' : 'col-span-12'}`}>
-    <h3 style={{ fontSize: '14px', marginBottom: '10px' }}>{title}</h3>
+    <h3 style={{ fontSize: '14px', marginBottom: subtitle ? '4px' : '10px' }}>{title}</h3>
+    {subtitle && (
+      <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>
+        {subtitle}
+      </p>
+    )}
     <div style={{ height: `${height}px`, width: '100%' }}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} layout={layout} margin={{ top: 20, right: 40, left: 10, bottom: 5 }}>
@@ -149,9 +164,14 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
-export const SimplePieChart = ({ data, title, colSpan = 6 }) => (
+export const SimplePieChart = ({ data, title, subtitle, colSpan = 6 }) => (
   <div className={`glass-panel chart-card col-span-${colSpan}`}>
-    <h3 style={{ fontSize: '14px', marginBottom: '10px' }}>{title}</h3>
+    <h3 style={{ fontSize: '14px', marginBottom: subtitle ? '4px' : '10px' }}>{title}</h3>
+    {subtitle && (
+      <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>
+        {subtitle}
+      </p>
+    )}
     <div style={{ height: '300px', width: '100%' }}>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>

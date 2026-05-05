@@ -12,7 +12,7 @@ export default function CompetenciasHabilidades({ data }) {
       </div>
       <div className="dashboard-grid">
         <div className="col-span-12" style={{ display: 'grid', gridColumn: 'span 12' }}>
-          <SimpleBarChart data={data.allSkillsChart} title="Competências Declaradas" total={t} layout="vertical" height={800} />
+          <SimpleBarChart data={data.allSkillsChart} title="Competências Declaradas" subtitle="Servidores que avaliaram seu domínio com nota 4 ou 5 nas seguintes habilidades:" total={t} layout="vertical" height={800} />
         </div>
       </div>
     </div>

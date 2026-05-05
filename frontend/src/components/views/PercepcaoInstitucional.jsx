@@ -13,7 +13,7 @@ export default function PercepcaoInstitucional({ data }) {
       <div className="dashboard-grid">
         {data.percepcaoCharts.map((chart, index) => (
           <div key={index} className="col-span-6" style={{ display: 'grid', gridColumn: 'span 6' }}>
-            <SimpleBarChart data={chart.data} title={chart.label} total={t} />
+            <SimpleBarChart data={chart.data} title={chart.label} subtitle={chart.question} total={t} />
           </div>
         ))}
       </div>

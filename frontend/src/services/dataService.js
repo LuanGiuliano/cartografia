@@ -150,19 +150,19 @@ export const processData = (rawData) => {
 
   // 5. Percepção Institucional (13 individual charts instead of averages)
   const percepcaoKeys = [
-    { key: 'uma visão abrangente da instituição', label: 'Visão Abrangente da Instituição' },
-    { key: 'movimentação para a atualização e estudos', label: 'Movimentação para Atualização' },
-    { key: 'alinhamento da rotina de trabalho', label: 'Alinhamento da Rotina de Trabalho' },
-    { key: 'disseminação de informações da área', label: 'Disseminação de Informações' },
-    { key: 'compartilhar informações de forma clara', label: 'Compartilhamento Claro' },
-    { key: 'soluções adequadas diante dos problemas', label: 'Propõe Soluções Adequadas' },
-    { key: 'propor soluções inovadoras', label: 'Propõe Soluções Inovadoras' },
-    { key: 'inspirar em exemplos de boas práticas', label: 'Inspiração em Boas Práticas' },
-    { key: 'independentemente de cobranças específicas', label: 'Ação Independente (Proatividade)' },
-    { key: 'protagonismo em momentos desafiadores', label: 'Protagonismo em Desafios' },
-    { key: 'planeja e prioriza suas atividades', label: 'Planejamento de Atividades' },
-    { key: 'aprimoramento de processos com ganhos', label: 'Aprimoramento de Processos' },
-    { key: 'participar de forma ativa dos projetos', label: 'Participação Ativa em Projetos' }
+    { key: 'uma visão abrangente da instituição', label: 'Visão Abrangente da Instituição', question: 'Na área em que atua é possível identificar que os servidores tem uma visão abrangente da instituição e tem clareza do impacto de suas ações?' },
+    { key: 'movimentação para a atualização e estudos', label: 'Movimentação para Atualização', question: 'Ocorre movimentação para a atualização e estudos sobre as diretrizes, normativas, fluxos e rotinas da Seduc-PA?' },
+    { key: 'alinhamento da rotina de trabalho', label: 'Alinhamento da Rotina de Trabalho', question: 'Ocorre o alinhamento da rotina de trabalho, por meio de feedback constante com a chefia imediata, mantendo o diálogo e a cooperação?' },
+    { key: 'disseminação de informações da área', label: 'Disseminação de Informações', question: 'Ocorre a disseminação de informações da área como vetor de mensagens positivas para os demais servidores, DREs, escolas e demais interessados?' },
+    { key: 'compartilhar informações de forma clara', label: 'Compartilhamento Claro', question: 'Procura-se compartilhar informações de forma clara, coerente, empática e imparcial?' },
+    { key: 'soluções adequadas diante dos problemas', label: 'Propõe Soluções Adequadas', question: 'Propõe-se soluções adequadas diante dos problemas, apoiando-se nas diretrizes da instituição, no conhecimento e na experiência profissional?' },
+    { key: 'propor soluções inovadoras', label: 'Propõe Soluções Inovadoras', question: 'Os servidores procuram propor soluções inovadoras, de forma colaborativa, com os demais membros da equipe?' },
+    { key: 'inspirar em exemplos de boas práticas', label: 'Inspiração em Boas Práticas', question: 'Procura-se inspirar em exemplos de boas práticas para solucionar os problemas?' },
+    { key: 'independentemente de cobranças específicas', label: 'Ação Independente (Proatividade)', question: 'Procura-se agir, independentemente de cobranças específicas, antecipando-se aos problemas e encarando desafios?' },
+    { key: 'protagonismo em momentos desafiadores', label: 'Protagonismo em Desafios', question: 'A equipe demonstra protagonismo em momentos desafiadores e se coloca disponível para auxiliar na resolução de situações críticas?' },
+    { key: 'planeja e prioriza suas atividades', label: 'Planejamento de Atividades', question: 'A equipe planeja e prioriza suas atividades com antecedência e acompanha prazos e metas de execução?' },
+    { key: 'aprimoramento de processos com ganhos', label: 'Aprimoramento de Processos', question: 'Ocorre constantemente o aprimoramento de processos com ganhos de qualidade, produtividade e eliminação de retrabalho?' },
+    { key: 'participar de forma ativa dos projetos', label: 'Participação Ativa em Projetos', question: 'A equipe procura acompanhar e participar de forma ativa dos projetos e ações realizadas no âmbito da Secretaria de Educação?' }
   ];
 
   const percepcaoCharts = percepcaoKeys.map(pk => {
@@ -178,6 +178,7 @@ export const processData = (rawData) => {
     });
     return {
       label: pk.label,
+      question: pk.question,
       data: rawData
     };
   });

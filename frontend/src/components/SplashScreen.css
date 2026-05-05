@@ -46,9 +46,9 @@
 }
 
 .splash-button {
-  background-color: var(--petroleum-blue);
+  background-color: #5A8B63;
   color: #ffffff;
-  border: 2px solid var(--petroleum-blue);
+  border: 2px solid #5A8B63;
   padding: 0.75rem 3rem;
   font-size: 1.25rem;
   font-weight: 600;
@@ -59,14 +59,15 @@
   letter-spacing: 0.1em;
   position: absolute;
   bottom: 20%; /* Posição fixa perto da base da tela, longe da logo central */
+  margin-left: 150px; /* Deslocado para ficar sob a palavra Perfis */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para dar destaque */
 }
 
 .splash-button:hover {
-  background-color: var(--petroleum-blue);
+  background-color: #4a7552;
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(27, 54, 93, 0.3);
+  box-shadow: 0 10px 25px rgba(90, 139, 99, 0.3);
 }
 
 .splash-footer {

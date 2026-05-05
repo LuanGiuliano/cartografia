@@ -26,8 +26,9 @@ export default function SplashScreen({ onComplete, isLoading }) {
       </div>
       <div className={`splash-footer ${isAnimating ? 'fade-out' : ''}`}>
         <img src="/seduc-logo.png" alt="Secretaria de Educação do Pará" className="splash-seduc-logo" />
-        <div className="splash-copyright">
-          © 2026 SAGEP - Secretaria Adjunta de Gestão de Pessoas
+        <div className="splash-copyright" style={{ display: 'flex', flexDirection: 'column', gap: '4px', textAlign: 'center' }}>
+          <span>© 2026 SAGEP - Secretaria Adjunta de Gestão de Pessoas</span>
+          <span style={{ fontSize: '0.85em', opacity: 0.8, fontWeight: 'normal', textTransform: 'none' }}>Desenvolvido por Luan Giuliano</span>
         </div>
       </div>
     </div>
