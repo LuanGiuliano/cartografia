@@ -10,7 +10,8 @@ import {
   Award,
   BookOpen,
   LayoutDashboard,
-  Info
+  Info,
+  Printer
 } from 'lucide-react';
 import './App.css';
 
@@ -50,6 +51,12 @@ function App() {
   const handlePrint = useReactToPrint({
     contentRef,
     documentTitle: `Relatorio_${activeTab}`,
+  });
+
+  const fullReportRef = useRef(null);
+  const handlePrintFull = useReactToPrint({
+    contentRef: fullReportRef,
+    documentTitle: `Relatorio_Completo_Cartografia_Saberes`,
   });
 
   // Filter states
@@ -141,6 +148,18 @@ function App() {
           ))}
         </nav>
         
+        <div style={{ padding: '0 1.5rem', marginTop: '1rem' }}>
+          <button 
+            onClick={handlePrintFull}
+            style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', padding: '0.75rem', backgroundColor: 'var(--petroleum-blue)', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', transition: 'opacity 0.2s' }}
+            onMouseOver={(e) => e.currentTarget.style.opacity = '0.9'}
+            onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
+          >
+            <Printer size={18} />
+            Relatório Completo
+          </button>
+        </div>
+        
         <div style={{ marginTop: 'auto', paddingTop: '1.5rem', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
           <div style={{ marginBottom: '4px' }}>© 2026 SAGEP - Secretaria Adjunta de Gestão de Pessoas</div>
           <div style={{ fontSize: '0.9em', opacity: 0.8 }}>Desenvolvido por Luan Giuliano</div>
@@ -194,6 +213,48 @@ function App() {
           </div>
         </main>
       </div>
+
+      {/* Relatório Completo (Oculto na tela, visível apenas via ref) */}
+      <div style={{ position: 'absolute', top: '-9999px', left: '-9999px', width: '1040px', opacity: 0, overflow: 'hidden' }}>
+        <div ref={fullReportRef}>
+          {VIEWS.map((view, index) => (
+            <div key={view.id} style={{ pageBreakBefore: index > 0 ? 'always' : 'auto', marginBottom: '2rem' }}>
+              {/* Cabecalho de Impressao do Relatorio Completo */}
+              <div className="print-header" style={{ marginBottom: '20px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                  <img src="/seduc-logo.png" alt="Logo Seduc" style={{ height: '45px', objectFit: 'contain' }} />
+                  <div>
+                    <h1 style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: '26px', margin: 0, color: '#1a365d' }}>
+                      Cartografia de Saberes
+                    </h1>
+                    <h2 style={{ fontSize: '18px', margin: 0, marginTop: '4px', color: '#4a5568', fontWeight: '500' }}>
+                      {view.label}
+                    </h2>
+                  </div>
+                </div>
+                <div style={{ width: '100%', height: '3px', backgroundColor: '#10b981', marginTop: '15px', borderRadius: '2px' }}></div>
+              </div>
+
+              <view.component data={data} />
+
+              {/* Rodape de Impressao do Relatorio Completo */}
+              <div className="print-footer" style={{ textAlign: 'center', marginTop: '40px', paddingTop: '20px', borderTop: '2px solid #e2e8f0' }}>
+                <p style={{ fontWeight: 'bold', fontSize: '13px', marginBottom: '8px', color: '#4a5568', textTransform: 'uppercase' }}>
+                  {
+                    selectedDiretoria && selectedCoordenacao 
+                      ? `${selectedDiretoria} > ${selectedCoordenacao}`
+                      : selectedDiretoria || selectedCoordenacao || "Visão Geral (Nenhum filtro aplicado)"
+                  }
+                </p>
+                <p style={{ fontSize: '12px', color: '#718096', margin: 0, fontWeight: '500' }}>
+                  Secretaria de Educação do Estado do Pará - SEDUC/PA
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <InfoModal isOpen={showInfoModal} onClose={() => setShowInfoModal(false)} />
     </>
   );

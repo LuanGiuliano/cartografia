@@ -20,6 +20,7 @@ export const ExpandableDiscursiveCard = ({ data, title, subtitle, total, layout 
         </div>
         <button 
           onClick={() => setIsExpanded(!isExpanded)}
+          className="print-hide"
           style={{
             padding: '6px 12px',
             backgroundColor: 'var(--accent-color)',
@@ -53,32 +54,28 @@ export const ExpandableDiscursiveCard = ({ data, title, subtitle, total, layout 
         </ResponsiveContainer>
       </div>
 
-      {isExpanded && (
-        <div style={{ 
-          marginTop: '15px', 
-          maxHeight: '300px', 
-          overflowY: 'auto', 
-          padding: '10px', 
-          backgroundColor: 'rgba(0,0,0,0.02)', 
-          borderTop: '1px solid var(--glass-border)',
-          borderRadius: '4px'
-        }}>
-          <h4 style={{ fontSize: '13px', marginBottom: '10px', color: 'var(--text-secondary)' }}>
-            {rawResponses.length} resposta(s) encontrada(s):
-          </h4>
-          {rawResponses.length === 0 ? (
-            <p style={{ fontSize: '13px', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
-              Nenhuma resposta discursiva encontrada para este campo.
-            </p>
-          ) : (
-            <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '13px', color: 'var(--text-primary)' }}>
-              {rawResponses.map((resp, idx) => (
-                <li key={idx} style={{ marginBottom: '8px', lineHeight: '1.4' }}>{resp}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
+      <div className={`discursive-responses ${isExpanded ? 'expanded' : ''}`} style={{ 
+        marginTop: '15px', 
+        padding: '10px', 
+        backgroundColor: 'rgba(0,0,0,0.02)', 
+        borderTop: '1px solid var(--glass-border)',
+        borderRadius: '4px'
+      }}>
+        <h4 style={{ fontSize: '13px', marginBottom: '10px', color: 'var(--text-secondary)' }}>
+          {rawResponses.length} resposta(s) encontrada(s):
+        </h4>
+        {rawResponses.length === 0 ? (
+          <p style={{ fontSize: '13px', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
+            Nenhuma resposta discursiva encontrada para este campo.
+          </p>
+        ) : (
+          <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '13px', color: 'var(--text-primary)' }}>
+            {rawResponses.map((resp, idx) => (
+              <li key={idx} style={{ marginBottom: '8px', lineHeight: '1.4' }}>{resp}</li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

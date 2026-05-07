@@ -167,9 +167,27 @@
 .print-only {
   display: none !important;
 }
+
+.discursive-responses {
+  display: none;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.discursive-responses.expanded {
+  display: block;
+}
+
 @media print {
   .print-only {
     display: block !important;
+  }
+  
+  .discursive-responses {
+    display: block !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+    page-break-inside: avoid;
   }
   
   @page {
@@ -189,7 +207,8 @@
   .main-content {
     padding: 0 !important;
     margin: 0 !important;
-    width: 100% !important;
+    width: 1040px !important;
+    max-width: 1040px !important;
     overflow: visible !important;
   }
   
@@ -204,7 +223,12 @@
     zoom: 0.65 !important;
   }
   
-  .col-span-12, .col-span-8, .col-span-6, .col-span-4 {
+  .col-span-12, .col-span-8 {
+    width: 100% !important;
+    grid-column: span 2 !important;
+  }
+  
+  .col-span-6, .col-span-4 {
     width: 100% !important;
     grid-column: span 1 !important;
   }
