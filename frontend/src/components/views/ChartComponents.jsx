@@ -38,7 +38,7 @@ export const ExpandableDiscursiveCard = ({ data, title, subtitle, total, layout 
 
       <div style={{ height: `${height}px`, width: '100%' }}>
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={wordFrequency} layout={layout} margin={{ top: 20, right: 40, left: 10, bottom: 5 }}>
+          <BarChart data={wordFrequency} layout={layout} margin={{ top: 20, right: 60, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis type="number" />
             <YAxis dataKey="name" type="category" width={yAxisWidth} tick={{ fontSize: 11 }} />
@@ -123,7 +123,7 @@ export const SimpleBarChart = ({ data, title, subtitle, total, layout = "horizon
     )}
     <div style={{ height: `${height}px`, width: '100%' }}>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} layout={layout} margin={{ top: 20, right: 40, left: 10, bottom: 5 }}>
+        <BarChart data={data} layout={layout} margin={{ top: 20, right: 60, left: 10, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" />
           {layout === 'horizontal' ? (
             <>

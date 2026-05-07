@@ -1,4 +1,4 @@
-import { Filter } from 'lucide-react';
+import { Filter, Printer } from 'lucide-react';
 import './GlobalFilters.css';
 
 export default function GlobalFilters({ 
@@ -7,13 +7,39 @@ export default function GlobalFilters({
   selectedDiretoria, 
   setSelectedDiretoria, 
   selectedCoordenacao, 
-  setSelectedCoordenacao 
+  setSelectedCoordenacao,
+  handlePrint
 }) {
   return (
-    <div className="global-filters-container">
-      <div className="filters-header">
-        <Filter size={18} color="var(--accent-color)" />
-        <h3>Filtros Globais</h3>
+    <div className="global-filters-container print-hide">
+      <div className="filters-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <Filter size={18} color="var(--accent-color)" />
+          <h3>Filtros Globais</h3>
+        </div>
+        <button 
+          onClick={() => handlePrint && handlePrint()}
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.5rem', 
+            padding: '0.5rem 1rem', 
+            backgroundColor: 'var(--accent-color)', 
+            color: 'white', 
+            border: 'none', 
+            borderRadius: '6px', 
+            cursor: 'pointer', 
+            fontWeight: '500', 
+            fontSize: '0.9rem',
+            transition: 'opacity 0.2s'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.opacity = '0.9'}
+          onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
+          title="Gerar PDF da aba atual"
+        >
+          <Printer size={16} />
+          Gerar PDF
+        </button>
       </div>
       
       <div className="filters-row">

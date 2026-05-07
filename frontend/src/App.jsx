@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { useReactToPrint } from 'react-to-print';
 import { fetchDashboardData, processData } from './services/dataService';
 import { 
   Building2, 
@@ -44,6 +45,12 @@ function App() {
   const [activeTab, setActiveTab] = useState(VIEWS[0].id);
   const [showSplash, setShowSplash] = useState(true);
   const [showInfoModal, setShowInfoModal] = useState(false);
+
+  const contentRef = useRef(null);
+  const handlePrint = useReactToPrint({
+    contentRef,
+    documentTitle: `Relatorio_${activeTab}`,
+  });
 
   // Filter states
   const [selectedDiretoria, setSelectedDiretoria] = useState('');
@@ -150,8 +157,41 @@ function App() {
             setSelectedDiretoria={setSelectedDiretoria}
             selectedCoordenacao={selectedCoordenacao}
             setSelectedCoordenacao={setSelectedCoordenacao}
+            handlePrint={handlePrint}
           />
-          <ActiveComponent data={data} />
+          <div ref={contentRef} className="print-content-wrapper">
+            {/* Cabecalho de Impressao (Oculto na tela, visivel no PDF) */}
+            <div className="print-only print-header" style={{ marginBottom: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                <img src="/seduc-logo.png" alt="Logo Seduc" style={{ height: '45px', objectFit: 'contain' }} />
+                <div>
+                  <h1 style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: '26px', margin: 0, color: '#1a365d' }}>
+                    Cartografia de Saberes
+                  </h1>
+                  <h2 style={{ fontSize: '18px', margin: 0, marginTop: '4px', color: '#4a5568', fontWeight: '500' }}>
+                    {VIEWS.find(v => v.id === activeTab)?.label}
+                  </h2>
+                </div>
+              </div>
+              <div style={{ width: '100%', height: '3px', backgroundColor: '#10b981', marginTop: '15px', borderRadius: '2px' }}></div>
+            </div>
+
+            <ActiveComponent data={data} />
+
+            {/* Rodape de Impressao (Oculto na tela, visivel no PDF) */}
+            <div className="print-only print-footer" style={{ textAlign: 'center', marginTop: '40px', paddingTop: '20px', borderTop: '2px solid #e2e8f0' }}>
+              <p style={{ fontWeight: 'bold', fontSize: '13px', marginBottom: '8px', color: '#4a5568', textTransform: 'uppercase' }}>
+                {
+                  selectedDiretoria && selectedCoordenacao 
+                    ? `${selectedDiretoria} > ${selectedCoordenacao}`
+                    : selectedDiretoria || selectedCoordenacao || "Visão Geral (Nenhum filtro aplicado)"
+                }
+              </p>
+              <p style={{ fontSize: '12px', color: '#718096', margin: 0, fontWeight: '500' }}>
+                Secretaria de Educação do Estado do Pará - SEDUC/PA
+              </p>
+            </div>
+          </div>
         </main>
       </div>
       <InfoModal isOpen={showInfoModal} onClose={() => setShowInfoModal(false)} />

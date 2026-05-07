@@ -163,3 +163,77 @@
     padding: 1.5rem;
   }
 }
+
+.print-only {
+  display: none !important;
+}
+@media print {
+  .print-only {
+    display: block !important;
+  }
+  
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+  
+  .print-hide, .sidebar, .global-filters-container, .info-modal, .view-header {
+    display: none !important;
+  }
+  
+  .app-layout {
+    display: block !important;
+    height: auto !important;
+  }
+  
+  .main-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+  
+  .view-content {
+    page-break-after: avoid !important;
+  }
+
+  .dashboard-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10mm !important;
+    zoom: 0.65 !important;
+  }
+  
+  .col-span-12, .col-span-8, .col-span-6, .col-span-4 {
+    width: 100% !important;
+    grid-column: span 1 !important;
+  }
+
+  .chart-card {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    box-shadow: none !important;
+    border: 1px solid var(--glass-border) !important;
+    margin-bottom: 0 !important;
+    overflow: hidden !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: white !important;
+  }
+  
+  * {
+    color: black !important;
+  }
+  
+  h1, h2, h3, h4, h5, h6, p, span, div {
+    color: black !important;
+  }
+  
+  text, tspan, .recharts-text, .recharts-legend-item-text {
+    fill: black !important;
+    color: black !important;
+  }
+}
