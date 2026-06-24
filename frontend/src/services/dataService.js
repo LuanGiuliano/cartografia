@@ -135,17 +135,17 @@ export const processData = (rawData) => {
   const outrasAreasChart = countWords('SE SIM, QUAIS ÁREAS?');
 
   // 4. Clima Organizacional
-  const sort5to1 = (arr) => [...arr].sort((a, b) => {
+  const sort1to5 = (arr) => [...arr].sort((a, b) => {
     const numA = parseInt(a.name);
     const numB = parseInt(b.name);
-    if (!isNaN(numA) && !isNaN(numB)) return numB - numA;
+    if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
     if (!isNaN(numA)) return -1;
     if (!isNaN(numB)) return 1;
     return 0;
   });
-  const climaComunicacaoChart = sort5to1(countBy('COMUNICAÇÃO INTERNA CLARA E OBJETIVA'));
-  const climaClarezaChart = sort5to1(countBy('CLAREZA DAS ATRIBUIÇÕES'));
-  const climaEmpatiaChart = sort5to1(countBy('EMPATIA E COOPERAÇÃO ENTRE PARES'));
+  const climaComunicacaoChart = sort1to5(countBy('COMUNICAÇÃO INTERNA CLARA E OBJETIVA'));
+  const climaClarezaChart = sort1to5(countBy('CLAREZA DAS ATRIBUIÇÕES'));
+  const climaEmpatiaChart = sort1to5(countBy('EMPATIA E COOPERAÇÃO ENTRE PARES'));
   const desafiosClimaChart = countWords('DESTAQUE AS PRINCIPAIS DESAFIOS QUE VOCÊ IDENTIFICA');
 
   // 5. Percepção Institucional (13 individual charts instead of averages)
@@ -167,11 +167,11 @@ export const processData = (rawData) => {
 
   const percepcaoCharts = percepcaoKeys.map(pk => {
     const rawData = countBy(pk.key).filter(d => d.name !== 'Não Informado');
-    // Força a ordem da legenda para ser 5, 4, 3, 2, 1
+    // Força a ordem da legenda para ser 1, 2, 3, 4, 5
     rawData.sort((a, b) => {
       const numA = parseInt(a.name);
       const numB = parseInt(b.name);
-      if (!isNaN(numA) && !isNaN(numB)) return numB - numA;
+      if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
       if (!isNaN(numA)) return -1;
       if (!isNaN(numB)) return 1;
       return 0;
